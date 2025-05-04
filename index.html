@@ -1,54 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Pegatinas</title> <img src="Imagen/Logo.png" alt="Logo" class="logo">
+  <title>Catálogo de Pegatinas</title>
   <style>
-      body {
+    body {
       font-family: Arial, sans-serif;
-      height: 100vh;
       margin: 0;
-      font-family: system-ui;
-      line-height: 1.5;
-      display: grid;
-      background: #f2f2f2;
+      background: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .contenedor { 
       width: 95%;
-      margin: 0 auto;
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
 
     nav {
-      background: #222;
-      color: white;
-      display: flex;
-      align-items: center;
+      background: rgb(8, 5, 177);
+      color: rgb(255, 255, 255);
       padding: 1em;
-      justify-content: space-between;
-    }
-
-    .logo {
-      width: 100px;
-      height: auto;
-      max-width: 100px;
-      display: block;
-      margin: 0 auto;
-    }
-
-    nav .logo {
-      font-size: 1.5em;
-      font-weight: bold;
+      text-align: center;
     }
 
     .carrusel {
       position: relative;
       overflow: hidden;
       height: 250px;
+      margin: 10px 0;
     }
 
     .carrusel img {
@@ -56,8 +40,6 @@
       height: 250px;
       object-fit: cover;
       position: absolute;
-      top: 0;
-      left: 0;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -69,58 +51,71 @@
     .catalogo {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1em;
-      padding: 1em;
+      gap: 15px;
+      padding: 15px;
     }
 
     .producto {
-      background: rgb(173, 170, 199);
-      border-radius: 20px;
-      padding: 3em;
+      background: rgb(153, 166, 202);
+      border-radius: 8px;
+      padding: 15px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       display: flex;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 5px;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
     }
 
     .producto img {
       width: 100%;
-      height: auto;
-      max-width: 250px;
-      max-height: 250px;
-      object-fit: cover;
-      border-radius: 8px;
+      max-width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 15px;
     }
 
     .producto h3 {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1,2;
+      margin: 0 0 10px 0;
+      font-size: 1em;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
     }
 
-    .producto p {
-      margin: 0;
-      font-size: bold;
-      color: #0000de;
+    .precio {
+      color: #000ba5;
+      font-weight: bold;
+      margin: 10px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #007bff;
+      width: 50%;
+      animation: parpadeo 3s infinite;
+    }
+
+    @keyframes parpadeo {
+      50%, 150% { opacity: 2; }
+      50% { opacity: 0.2; }
     }
 
     .boton-ws {
-      margin-top: fixed;
-      padding: 0.5em 1em;
-      background-color: #0000de;
+      padding: 10px 15px;
+      background-color: #0d1fc0;
       color: white;
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
+      width: 90%;
+      max-width: 200px;
+      margin-top: auto;
+      animation: parpadeo 4s infinite;
     }
 
     footer {
       text-align: center;
       padding: 1em;
-      background: #333;
-      color: white;
-      margin-top: 2em;
+      background: #071091;
+      color: rgb(255, 255, 255);
+      margin-top: auto;
     }
 
     .navegacion {
@@ -128,57 +123,61 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
-    }
-
-    .boton-pagina {
-      cursor: pointer;
-      padding: 10px 20px;
-      border: none;
-      background: #007bff;
-      color: white;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-
-    .boton-pagina:hover {
-      background: #0056b3;
+      padding: 20px 0;
     }
 
     .contador-paginas {
       font-size: 1.2em;
       margin: 0 15px;
+      color: rgb(8, 5, 177);
     }
 
     .flecha {
-      font-size: 20px;
+      font-size: 24px;
       cursor: pointer;
       user-select: none;
+      color: rgb(8, 5, 177);
     }
 
     .boton-flotante {
       position: fixed;
-      bottom: 15px;
+      bottom: 20px;
       left: 20px;
       background-color: #0070ba;
       color: white;
-      border: none;
-      padding: 0.8em 2em;
-      border-radius: 70px;
-      font-size: 20px;
-      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 50px;
       text-decoration: none;
-      z-index: 2000;
       display: flex;
       align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
       animation: parpadeo 2s infinite;
-      box-shadow: 2 2 20px rgba(0,0,0,0.3);
     }
 
     @keyframes parpadeo {
       50%, 150% { opacity: 2; }
       50% { opacity: 0.2; }
     }
-    
+
+    @media (min-width: 768px) {
+      .catalogo {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .carrusel {
+        height: 400px;
+      }
+      
+      .carrusel img {
+        height: 400px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .catalogo {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
   </style>
 </head>
 <body>
@@ -397,10 +396,10 @@ function actualizarPagina() {
     const container = document.getElementById('productos-container');
     container.innerHTML = productosPagina.map(producto => `
         <div class="producto">
-            <img src="${producto.imagen}" alt="${producto.titulo}" />
+            <img src="${producto.imagen}" alt="${producto.titulo}">
             <h3>${producto.titulo}</h3>
-            <p>Precio: ${producto.precio}</p>
-            <a class="boton-ws" href="${producto.enlace}">Comprar</a>
+            <p class="precio">${producto.precio}</p>
+            <a class="boton-ws" href="${producto.enlace}" target="_blank">Comprar por WhatsApp</a>
         </div>
     `).join('');
 
@@ -433,7 +432,7 @@ setInterval(() => {
 </script>
 
 <footer>
-  <p>&copy; 2025 Catálogo de Pegatinas. Todos los derechos reservados. Gran Piedra</p>
+  <p>&copy; 2025 Catálogo de Pegatinas. Todos los derechos reservados.</p>
 </footer>
 
 <a class="boton-flotante" href="https://www.paypal.me/neuronaintranquila" target="_blank">
