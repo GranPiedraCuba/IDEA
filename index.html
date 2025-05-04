@@ -74,13 +74,13 @@
     }
 
     .producto {
-      background: white;
-      border-radius: 8px;
-      padding: 1em;
+      background: rgb(173, 170, 199);
+      border-radius: 20px;
+      padding: 3em;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: grid;
-      grid-template-columns: repeat(2 ,1fr);
-      gap: 20px;
+      display: flex;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
       align-items: center;
     }
 
@@ -94,13 +94,21 @@
     }
 
     .producto h3 {
-      margin: 0.5em 0;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1,2;
+    }
+
+    .producto p {
+      margin: 0;
+      font-size: bold;
+      color: #0000de;
     }
 
     .boton-ws {
-      margin-top: auto;
+      margin-top: fixed;
       padding: 0.5em 1em;
-      background-color: #25d366;
+      background-color: #0000de;
       color: white;
       text-decoration: none;
       border-radius: 5px;
@@ -142,34 +150,35 @@
     }
 
     .flecha {
-      font-size: 24px;
+      font-size: 20px;
       cursor: pointer;
       user-select: none;
     }
 
     .boton-flotante {
       position: fixed;
-      bottom: 20px;
+      bottom: 15px;
       left: 20px;
       background-color: #0070ba;
       color: white;
       border: none;
-      padding: 0.8em 1.2em;
-      border-radius: 50px;
-      font-size: 16px;
+      padding: 0.8em 2em;
+      border-radius: 70px;
+      font-size: 20px;
       font-weight: bold;
       text-decoration: none;
-      z-index: 1000;
+      z-index: 2000;
       display: flex;
       align-items: center;
-      animation: parpadeo 1s infinite;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: parpadeo 2s infinite;
+      box-shadow: 2 2 20px rgba(0,0,0,0.3);
     }
 
     @keyframes parpadeo {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+      50%, 150% { opacity: 2; }
+      50% { opacity: 0.2; }
     }
+    
   </style>
 </head>
 <body>
@@ -391,7 +400,7 @@ function actualizarPagina() {
             <img src="${producto.imagen}" alt="${producto.titulo}" />
             <h3>${producto.titulo}</h3>
             <p>Precio: ${producto.precio}</p>
-            <a class="boton-ws" href="${producto.enlace}">Comprar por WhatsApp</a>
+            <a class="boton-ws" href="${producto.enlace}">Comprar</a>
         </div>
     `).join('');
 
