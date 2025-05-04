@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Pegatinas</title>
+  <title>Catálogo de Pegatinas</title> <img src="Imagen/Logo.png" alt="Logo" class="logo">
   <style>
     body {
       font-family: Arial, sans-serif;
+      height: 100vh;
       margin: 0;
-      background: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: system-ui;
+      line-height: 1.5;
+      display: grid;
+      background: #f2f2f2;
     }
 
     .contenedor { 
       width: 95%;
-      max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+    }
+    nav {
+      background: #222;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 1em;
+      justify-content: space-between;
     }
 
-    nav {
-      background: rgb(8, 5, 177);
-      color: rgb(255, 255, 255);
-      padding: 1em;
-      text-align: center;
+    .logo {
+      width: 100px;
+      height: auto;
+      max-width: 100px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav .logo {
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
     .carrusel {
       position: relative;
       overflow: hidden;
       height: 250px;
-      margin: 10px 0;
     }
 
     .carrusel img {
@@ -40,6 +52,8 @@
       height: 250px;
       object-fit: cover;
       position: absolute;
+      top: 0;
+      left: 0;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
@@ -50,134 +64,90 @@
 
     .catalogo {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 15px;
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas */
+      gap: 1em;
+      padding: 1em;
     }
 
     .producto {
-      background: rgb(153, 166, 202);
+      background: white;
       border-radius: 8px;
-      padding: 15px;
+      padding: 1em;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(2 ,1fr);
+      gap: 20px;
       align-items: center;
-      text-align: center;
     }
 
     .producto img {
       width: 100%;
-      max-width: 200px;
-      height: 200px;
-      object-fit: contain;
-      margin-bottom: 15px;
+      height: auto;
+      max-width: 250px;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
     .producto h3 {
-      margin: 0 0 10px 0;
-      font-size: 1em;
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-    }
-
-    .precio {
-      color: #000ba5;
-      font-weight: bold;
-      margin: 10px 0;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #007bff;
-      width: 50%;
-      animation: parpadeo 3s infinite;
-    }
-
-    @keyframes parpadeo {
-      50%, 150% { opacity: 2; }
-      50% { opacity: 0.2; }
+      margin: 0.5em 0;
     }
 
     .boton-ws {
-      padding: 10px 15px;
-      background-color: #0d1fc0;
+      margin-top: auto;
+      padding: 0.5em 1em;
+      background-color: #25d366;
       color: white;
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
-      width: 90%;
-      max-width: 200px;
-      margin-top: auto;
-      animation: parpadeo 4s infinite;
     }
 
     footer {
       text-align: center;
       padding: 1em;
-      background: #071091;
-      color: rgb(255, 255, 255);
-      margin-top: auto;
+      background: #333;
+      color: white;
+      margin-top: 2em;
     }
 
-    .navegacion {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 0;
-    }
-
-    .contador-paginas {
-      font-size: 1.2em;
-      margin: 0 15px;
-      color: rgb(8, 5, 177);
-    }
-
-    .flecha {
-      font-size: 24px;
-      cursor: pointer;
-      user-select: none;
-      color: rgb(8, 5, 177);
-    }
-
+       /* Botón flotante de donación */
     .boton-flotante {
       position: fixed;
       bottom: 20px;
-      left: 20px;
-      background-color: #0070ba;
+      left: 20px; /* Cambié a la izquierda */
+      background-color: #0070ba; /* Color azul de PayPal */
       color: white;
-      padding: 12px 20px;
+      border: none;
+      padding: 0.8em 1.2em;
       border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
       text-decoration: none;
+      z-index: 1000;
       display: flex;
       align-items: center;
+      animation: parpadeo 1s infinite;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      animation: parpadeo 2s infinite;
     }
 
-    @keyframes parpadeo {
-      50%, 150% { opacity: 2; }
-      50% { opacity: 0.2; }
-    }
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
-    @media (min-width: 768px) {
-      .catalogo {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .carrusel {
-        height: 400px;
-      }
-      
-      .carrusel img {
-        height: 400px;
-      }
-    }
+footer {
+  position: relative;
+}
 
-    @media (min-width: 1024px) {
-      .catalogo {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
+#contador-visitas {
+  position: absolute;
+  left: 15px;
+  buttom: 15px;
+  font-size: 0.9em;
+  color: #ccc;
+}
+
   </style>
 </head>
 <body>
@@ -193,252 +163,249 @@
   <img src="Imagen/14.jpeg" alt="Slide 4">
 </div>
 
-<main class="catalogo" id="productos-container"></main>
+<main class="catalogo">
+  <div class="producto">
+    <img src="Imagen/1.jpeg" alt="Andas más apretado que un Cohíba en su caja" />
+    <h3>Andas más apretado que un Cohíba en su caja</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Andas%20más%20apretado%20que%20un%20Cohíba%20en%20su%20caja">Comprar por WhatsApp</a>
+  </div>
 
-<div class="contenedor">    
-    <div class="navegacion">
-        <div class="flecha" onclick="previousPage()">◀</div>
-        <div class="contador-paginas">
-            <span id="pagina-actual">1</span> / 
-            <span id="total-paginas">1</span>
-        </div>
-        <div class="flecha" onclick="nextPage()">▶</div>
-    </div>
-</div>
+  <div class="producto">
+    <img src="Imagen/2.jpeg" alt="Más vale maña que almendrón roto" />
+    <h3>Más vale maña que almendrón roto</h3>
+    <p>Precio: 6€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Más%20vale%20maña%20que%20almendrón%20roto">Comprar por WhatsApp</a>
+  </div>
 
-<script>
-const productos = [
-  {
-    imagen: 'Imagen/1.jpeg',
-    titulo: 'Andas más apretado que un Cohíba en su caja',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Andas%20más%20apretado%20que%20un%20Cohíba%20en%20su%20caja'
-  },
-  {
-    imagen: 'Imagen/2.jpeg',
-    titulo: 'Más vale maña que almendrón roto',
-    precio: '6€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Más%20vale%20maña%20que%20almendrón%20roto'
-  },
-  {
-    imagen: 'Imagen/3.jpeg',
-    titulo: 'Ese tiene menos palabras que un mudo jugando',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Ese%20tiene%20menos%20palabras%20que%20un%20mudo%20jugando'
-  },
-  {
-    imagen: 'Imagen/4.jpeg',
-    titulo: 'Estás más perdido que guajiro en la Plaza de la Revolución',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Estás%20más%20perdido%20que%20guajiro%20en%20la%20Plaza%20de%20la%20Revolución'
-  },
-  {
-    imagen: 'Imagen/5.jpeg',
-    titulo: 'Con tu amor hasta el pan con timba sabe a gloria',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Con%20tu%20amor%20hasta%20el%20pan%20con%20timba%20sabe%20a%20gloria'
-  },
-  {
-    imagen: 'Imagen/6.jpeg',
-    titulo: 'Tienes más historia que la Habana Vieja',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Tienes%20más%20historia%20que%20la%20Habana%20Vieja'
-  },
-  {
-    imagen: 'Imagen/7.jpeg',
-    titulo: 'No te pongas como el malecón en Temporal',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20te%20pongas%20como%20el%20malecón%20en%20Temporal'
-  },
-  {
-    imagen: 'Imagen/8.jpeg',
-    titulo: 'No te compliques, que la vida es un juego de dominó',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20te%20complique%20que%20la%20vida%20es%20un%20juego%20de%20dominó'
-  },
-  {
-    imagen: 'Imagen/9.jpeg',
-    titulo: 'Tú eres el guarapo de mi vida',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Tú%20eres%20el%20guarapo%20de%20mi%20vida'
-  },
-  {
-    imagen: 'Imagen/10.jpeg',
-    titulo: 'Tu sonrisa ilumina más que un almendrón con luces led',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Tu%20sonrisa%20ilumina%20más%20que%20un%20almendrón%20con%20luces%20led'
-  },
-  {
-    imagen: 'Imagen/11.jpeg',
-    titulo: 'Como dijo Benny Moré: Qué bueno baila usted!... y qué bien me hace quererte',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Como%20dijo%20Benny%20Moré:%20Qué%20bueno%20baila%20usted!...%20y%20qué%20bien%20me%20hace%20quererte'
-  },
-  {
-    imagen: 'Imagen/12.jpeg',
-    titulo: 'Eres como el café cubano, pequeño, fuerte y me despiertas el alma',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Eres%20como%20el%20café%20cubano,%20pequeño,%20fuerte%20y%20me%20despiertas%20el%20alma'
-  },
-  {
-    imagen: 'Imagen/13.jpeg',
-    titulo: 'Andas más apretado que un Cohíba en su caja',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Andas%20más%20apretado%20que%20un%20Cohíba%20en%20su%20caja'
-  },
-  {
-    imagen: 'Imagen/14.jpeg',
-    titulo: 'Eres la candela que me cocina el corazón',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Eres%20la%20candela%20que%20me%20cocina%20el%20corazón'
-  },
-  {
-    imagen: 'Imagen/15.png',
-    titulo: 'El que no tiene de congo, tiene de carabalí',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20El%20que%20no%20tiene%20de%20congo,%20tiene%20de%20carabalí'
-  },
-  {
-    imagen: 'Imagen/16.png',
-    titulo: 'Aquí no se rinde nadie. Cojone',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Aquí%20no%20se%20rinde%20nadie.%20Cojone'
-  },
-  {
-    imagen: 'Imagen/17.png',
-    titulo: 'Más viejo que el camino de El Rocío',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Más%20viejo%20que%20el%20camino%20de%20El%20Rocío'
-  },
-  {
-    imagen: 'Imagen/18.png',
-    titulo: 'A caballo regalao no se le mira el colmillo',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20A%20caballo%20regalao%20no%20se%20le%20mira%20el%20colmillo'
-  },
-  {
-    imagen: 'Imagen/19.png',
-    titulo: 'El que se fue para Mantilla, perdió su silla',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20El%20que%20se%20fue%20para%20Mantilla,%20perdió%20su%20silla'
-  },
-  {
-    imagen: 'Imagen/20.png',
-    titulo: 'No hay peor ciego que el que no quiere ver',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20hay%20peor%20ciego%20que%20el%20que%20no%20quiere%20ver'
-  },
-  {
-    imagen: 'Imagen/21.png',
-    titulo: 'No por mucho madrugar, amanece más temprano',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20por%20mucho%20madrugar,%20amanece%20más%20temprano'
-  },
-  {
-    imagen: 'Imagen/22.png',
-    titulo: 'El que no llora no mama',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20El%20que%20no%20llora%20no%20mama'
-  },
-  {
-    imagen: 'Imagen/23.png',
-    titulo: 'En casa de herrero, cuchillo de palo',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20En%20casa%20de%20herrero,%20cuchillo%20de%20palo'
-  },
-  {
-    imagen: 'Imagen/24.png',
-    titulo: 'Más claro no canta un gallo',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Más%20claro%20no%20canta%20un%20gallo'
-  },
-  {
-    imagen: 'Imagen/25.png',
-    titulo: 'Yo soy cubano y digo asere',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Yo%20soy%20cubano%20y%20digo%20asere'
-  },
-  {
-    imagen: 'Imagen/26.png',
-    titulo: 'Yo soy cubana y digo asere',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Yo%20soy%20cubana%20y%20digo%20asere'
-  },
-  {
-    imagen: 'Imagen/27.png',
-    titulo: 'Al pan pan, y al vino vino',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Al%20pan%20pan,%20y%20al%20vino%20vino'
-  },
-  {
-    imagen: 'Imagen/28.png',
-    titulo: 'A mi me dicen Cuba',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20A%20mi%20me%20dicen%20Cuba'
-  },
-  {
-    imagen: 'Imagen/29.png',
-    titulo: 'Cubano soy',
-    precio: '5€',
-    enlace: 'https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Cubano%20soy'
-  }
-];
+  <div class="producto">
+    <img src="Imagen/3.jpeg" alt="Ese tiene menos palabras que un mudo jugando" />
+    <h3>Ese tiene menos palabras que un mudo jugando</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Ese%20tiene%20menos%20palabras%20que%20un%20mudo%20jugando">Comprar por WhatsApp</a>
+  </div>
+  
 
-let paginaActual = 1;
-const productosPorPagina = 10;
-const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+  <div class="producto">
+    <img src="Imagen/4.jpeg" alt="Estás más perdido que guajiro en la Plaza de la Revolución" />
+    <h3>Estás más perdido que guajiro en la Plaza de la Revolución</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Estás%20más%20perdido%20que%20guajiro%20en%20la%20Plaza%20de%20la%20Revolución">Comprar por WhatsApp</a>
+  </div>
 
-function actualizarPagina() {
-    const inicio = (paginaActual - 1) * productosPorPagina;
-    const fin = inicio + productosPorPagina;
-    const productosPagina = productos.slice(inicio, fin);
-    
-    const container = document.getElementById('productos-container');
-    container.innerHTML = productosPagina.map(producto => `
-        <div class="producto">
-            <img src="${producto.imagen}" alt="${producto.titulo}">
-            <h3>${producto.titulo}</h3>
-            <p class="precio">${producto.precio}</p>
-            <a class="boton-ws" href="${producto.enlace}" target="_blank">Comprar por WhatsApp</a>
-        </div>
-    `).join('');
+  <div class="producto">
+    <img src="Imagen/5.jpeg" alt="Con tu amor hasta el pan con timba sabe a gloria" />
+    <h3>Con tu amor hasta el pan con timba sabe a gloria</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Con%20tu%20amor%20hasta%20el%20pan%20con%20timba%20sabe%20a%20gloria">Comprar por WhatsApp</a>
+  </div>
 
-    document.getElementById('pagina-actual').textContent = paginaActual;
-    document.getElementById('total-paginas').textContent = totalPaginas;
-}
+  <div class="producto">
+    <img src="Imagen/6.jpeg" alt="Tienes más historia que la Habana Vieja" />
+    <h3>Tienes más historia que la Habana Vieja</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Tienes%20más%20historia%20que%20la%20Habana%20Vieja">Comprar por WhatsApp</a>
+  </div>
 
-function previousPage() {
-    paginaActual = paginaActual > 1 ? paginaActual - 1 : totalPaginas;
-    actualizarPagina();
-}
+  <div class="producto">
+    <img src="Imagen/7.jpeg" alt="No te pongas como el malecón en Temporal" />
+    <h3>No te pongas como el malecón en Temporal</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20te%20pongas%20como%20el%20malecón%20en%20Temporal">Comprar por WhatsApp</a>
+  </div>
 
-function nextPage() {
-    paginaActual = paginaActual < totalPaginas ? paginaActual + 1 : 1;
-    actualizarPagina();
-}
+  <div class="producto">
+    <img src="Imagen/8.jpeg" alt="No te compliques, que la vida es un juego de dominó" />
+    <h3>No te compliques, que la vida es un juego de dominó</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%25te%20complique%20que%20la%20vida%20es%20un%20juego%20de%20dominó">Comprar por WhatsApp</a>
+  </div>
 
-// Inicializar
-actualizarPagina();
+  <div class="producto">
+    <img src="Imagen/9.jpeg" alt="Tú eres el guarapo de mi vida" />
+    <h3>Tú eres el guarapo de mi vida</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Tú%20eres%20el%20guarapo%20de%20mi%20vida">Comprar por WhatsApp</a>
+  </div>
 
-// Carrusel
-const slides = document.querySelectorAll('.carrusel img');
-let current = 0;
+  <div class="producto">
+    <img src="Imagen/10.jpeg" alt="Tu sonrisa ilumina más que un almendrón con luces led" />
+    <h3>Tu sonrisa ilumina más que un almendrón con luces led</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Tu%20sonrisa%20ilumina%20más%20que%20un%20almendrón%20con%20luces%20led">Comprar por WhatsApp</a>
+  </div>
 
-setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-}, 3000);
-</script>
+  <div class="producto">
+    <img src="Imagen/11.jpeg" alt="Como dijo Benny Moré: Qué bueno baila usted!... y qué bien me hace quererte" />
+    <h3>Como dijo Benny Moré: Qué bueno baila usted!... y qué bien me hace quererte</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Como%20dijo%20Benny%20Moré:%20Qué%20bueno%20baila%20usted!...%20y%20qué%20bien%20me%20hace%20quererte">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/12.jpeg" alt="Eres como el café cubano, pequeño, fuerte y me despiertas el alma" />
+    <h3>Eres como el café cubano, pequeño, fuerte y me despiertas el alma</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Eres%20como%20el%20café%20cubano,%20pequeño,%20fuerte%20y%20me%20despiertas%20el%20alma">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/13.jpeg" alt="Andas más apretado que un Cohíba en su caja" />
+    <h3>Andas más apretado que un Cohíba en su caja</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Andas%20más%20apretado%20que%20un%20Cohíba%20en%20su%20caja">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/14.jpeg" alt="Eres la candela que me cocina el corazón" />
+    <h3>Eres la candela que me cocina el corazón</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Eres%20la%20candela%20que%20me%20cocina%20el%20corazón">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/15.png" alt="El que no tiene de congo, tiene de carabalí" />
+    <h3>El que no tiene de congo, tiene de carabalí</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20El%20que%20no%20tiene%20de%20congo,%20tiene%20de%20carabalí">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/16.png" alt="Aquí no se rinde nadie. Cojone" />
+    <h3>Aquí no se rinde nadie. Cojone</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Aquí%20no%20se%20rinde%20nadie.%20Cojone">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/17.png" alt="Más viejo que el camino de El Rocío" />
+    <h3>Más viejo que el camino de El Rocío</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Más%20viejo%20que%20el%20camino%20de%20El%20Rocío">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/18.png" alt="A caballo regalao no se le mira el colmillo" />
+    <h3>A caballo regalao no se le mira el colmillo</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20A%20caballo%20regalao%20no%20se%20le%20mira%20el%20colmillo">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/19.png" alt="El que se fue para Mantilla, perdió su silla" />
+    <h3>El que se fue para Mantilla, perdió su silla</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20El%20que%20se%20fue%20para%20Mantilla,%20perdió%20su%20silla">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/20.png" alt="No hay peor ciego que el que no quiere ver" />
+    <h3>No hay peor ciego que el que no quiere ver</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20hay%20peor%20ciego%20que%20el%20que%20no%20quiere%20ver">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/21.png" alt="No por mucho madrugar, amanece más temprano" />
+    <h3>No por mucho madrugar, amanece más temprano</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20No%20por%20mucho%20madrugar,%20amanece%20más%20temprano">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/22.png" alt="El que no llora no mama" />
+    <h3>El que no llora no mama</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20El%20que%20no%20llora%20no%20mama">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/23.png" alt="En casa de herrero, cuchillo de palo" />
+    <h3>En casa de herrero, cuchillo de palo</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20En%20casa%20de%20herrero,%20cuchillo%20de%20palo">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/24.png" alt="Más claro no canta un gallo" />
+    <h3>Más claro no canta un gallo</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Más%20claro%20no%20canta%20un%20gallo">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/25.png" alt="Yo soy cubano y digo asere" />
+    <h3>Yo soy cubano y digo asere</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Yo%20soy%20cubano%20y%20digo%20asere">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/26.png" alt="Yo soy cubana y digo asere" />
+    <h3>Yo soy cubana y digo asere</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Yo%20soy%20cubana%20y%20digo%20asere">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/27.png" alt="Al pan pan, y al vino vino" />
+    <h3>Al pan pan, y al vino vino</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Al%20pan%20pan,%20y%20al%20vino%20vino">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/28.png" alt="A mi me dicen Cuba" />
+    <h3>A mi me dicen Cuba</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20A%20mi%20me%20dicen%20Cuba">Comprar por WhatsApp</a>
+  </div>
+
+  <div class="producto">
+    <img src="Imagen/29.png" alt="Cubano soy" />
+    <h3>Cubano soy</h3>
+    <p>Precio: 5€</p>
+    <a class="boton-ws" href="https://wa.me/34651169736?text=Hola,%20quiero%20comprar%20la%20Pegatina%20Diseño%20Cubano%20soy">Comprar por WhatsApp</a>
+  </div>
+
+</main>
 
 <footer>
-  <p>&copy; 2025 Catálogo de Pegatinas. Todos los derechos reservados.</p>
+  <p>&copy; 2025 Catálogo de Pegatinas. Todos los derechos reservados. Gran Piedra</p>
+  <div id="contador-visitas">Cargando visitas...</div>
 </footer>
 
+<!-- Botón flotante Donar -->
 <a class="boton-flotante" href="https://www.paypal.me/neuronaintranquila" target="_blank">
   <img src="Imagen/paypal.png" alt="PayPal" style="width: 25px; height: 25px; margin-right: 10px;">
   Donar
 </a>
+
+<script>
+  const slides = document.querySelectorAll('.carrusel img');
+  let current = 0;
+
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 3000);
+
+  const namespace = 'Catálogo de Pegatinas';
+  const key = 'visitasTotales'
+
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(response => response.json())
+    .then(data => {
+        const contador = document.getElementById('contador-visitas');
+        contador.textContent = `Visitas: ${data.value}`;
+    })
+    .catch(error => {
+        console.error('Error al cargar el contador:', error);
+        document.getElementById('contador-visitas').textContent = '';
+    });
+  
+</script>
 
 </body>
 </html>
