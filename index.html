@@ -1,171 +1,198 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Camisetas</title>
+  <title>Gran Piedra</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f2f2f2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+   * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    .contenedor {
-      width: 95%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+body {
+  font-family: sans-serif;
+  background: #f5f5f5;
+  padding-bottom: 80px;
+}
 
-    nav {
-      background: #222;
-      color: white;
-      padding: 1em;
-      text-align: center;
-      animation: parpadeo 2s infinite;
-    }
+#menu {
+  background: #020169;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  top: 0;
+  z-index: 10;
+  transition: padding 0.3s ease;
+}
 
-    @keyframes parpadeo {
-      0%, 100% {opacity: 1;}
-      50% { opacity: 0.3;}
-    }
+.logo {
+  font-size: 1.5em;
+}
 
-    .carrusel {
-      position: relative;
-      overflow: hidden;
-      height: 250px;
-      margin: 10px 0;
-    }
+.carrusel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  max-height: 300px;
+}
 
-    .carrusel img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      position: absolute;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
+.carrusel img {
+  width: 100%;
+  display: none;
+  object-fit: cover;
+  height: 300px;
+  transition: opacity 1s ease;
+}
 
-    .carrusel img.active {
-      opacity: 1;
-    }
+.carrusel img.active {
+  display: block;
+}
 
-    .catalogo {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 15px;
-    }
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
 
-    .producto {
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+.producto {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 360px;
+  box-sizing: border-box;
+}
 
-    .producto img {
-      width: 100%;
-      max-width: 200px;
-      height: 200px;
-      object-fit: contain;
-      margin-bottom: 15px;
-    }
+.producto img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
 
-    .producto h3 {
-      margin: 0 0 10px 0;
-      font-size: 1em;
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-    }
+.precio {
+  font-weight: bold;
+  color: #060892;
+  margin: 10px 0;
+  animation: parpadeo 5s infinite;
+}
 
-    .precio {
-      color: #007bff;
-      font-weight: bold;
-      margin: 10px 0;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #007bff;
-      width: 100%;
-      animation: parpadeo 2s infinite;
-    }
+.botones-talla button,
+.boton-ws {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #060892;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  animation: parpadeo 3s infinite;
+}
 
-    .producto select,
-    .producto input[type="text"] {
-      color: #024996;
-      margin: 5px 0;
-      padding: 5px;
-      width: 90%;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
+.botones-talla button:hover,
+.boton-ws:hover {
+  background: #ff0000;
+}
 
-    .boton-ws {
-      padding: 10px 15px;
-      background-color: #101dcf;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      width: 90%;
-      max-width: 200px;
-      margin-top: 10px;
-      animation: parpadeo 3s infinite;
-      border: none;
-      cursor: pointer;
-    }
+.botones-talla .selected,
+.botones-color .selected {
+  border: 2px solid #000000;
+  box-shadow: 0 0 5px #000000;
+}
 
-    footer {
-      text-align: center;
-      padding: 1em;
-      background: #333;
-      color: white;
-      margin-top: auto;
-    }
+.botones-color {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
 
-    .navegacion {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 0;
-    }
+.color-box {
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  transition: transform 0.2s;
+}
 
-    .contador-paginas {
-      font-size: 1.2em;
-      margin: 0 15px;
-    }
+.color-box:hover {
+  transform: scale(1.1);
+}
 
-    .flecha {
-      font-size: 24px;
-      cursor: pointer;
-      user-select: none;
-    }
+input[type="number"],
+input[type="text"] {
+  margin: 5px 0;
+  padding: 5px;
+  width: 100%;
+  max-width: 150px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
 
-    .boton-flotante {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #0070ba;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      animation: parpadeo 2s infinite;
-    }
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
 
-    @media (min-width: 768px) {
+.navegacion {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.flecha {
+  cursor: pointer;
+  font-size: 1.5em;
+  user-select: none;
+}
+
+.contador-paginas {
+  font-size: 1.2em;
+}
+
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background: #222;
+  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.boton-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0070ba;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  animation: parpadeo 6s infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% {
+    opacity: 1;
+  } 
+  50% { 
+    opacity: 0.3;
+  }
+}
+
+@media (min-width: 768px) {
       .catalogo {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -179,17 +206,32 @@
       }
     }
 
-    @media (min-width: 1024px) {
-      .catalogo {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
+@media (max-width: 1024px) {
+  .catalogo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .color-box {
+    width: 20px;
+    height: 20px;
+  }
+
+  #menu {
+    font-size: 0.9em;
+  }
+
+  .boton-flotante {
+    font-size: 0.9em;
+    padding: 8px 12px;
+  }
+}
   </style>
 </head>
 <body>
 
-<nav>
+<nav id="menu">
   <div class="logo">Catálogo</div>
+  <p>Camiseta con pegatina</p>
 </nav>
 
 <div class="carrusel" id="carrusel">
@@ -214,7 +256,7 @@
 
 <script>
 const productos = [
-  {
+{
     imagen: 'Imagen/1.jpeg',
     titulo: 'Andas más apretado que un Cohíba en su caja',
     precio: '20€',
@@ -377,23 +419,19 @@ function actualizarPagina() {
       <h3>${producto.titulo}</h3>
       <p class="precio">${producto.precio}</p>
 
-      <label for="talla-${index}">Talla:</label>
-      <select id="talla-${index}">
-        <option value="">Seleccionar talla</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-      </select>
+      <label>Talla:</label>
+      <div id="tallas-${index}" class="botones-talla">
+        ${['S','M','L','XL'].map(t => `<button onclick="seleccionarTalla(${index}, '${t}', this)">${t}</button>`).join('')}
+      </div>
 
-      <label for="color-${index}">Color:</label>
-      <select id="color-${index}">
-        <option value="">Seleccionar color</option>
-        <option value="Negro">Negro</option>
-        <option value="Blanco">Blanco</option>
-        <option value="Rojo">Rojo</option>
-        <option value="Azul">Azul</option>
-      </select>
+      <label>Color:</label>
+      <div id="colores-${index}" class="botones-color">
+        <div class="color-box" style="background-color: black;" data-color="Negro" onclick="seleccionarColor(${index}, 'Negro', this)"></div>
+        <div class="color-box" style="background-color: white; border: 1px solid #000;" data-color="Blanco" onclick="seleccionarColor(${index}, 'Blanco', this)"></div>
+      </div>
+
+      <label for="cantidad-${index}">Cantidad:</label>
+      <input type="number" id="cantidad-${index}" value="1" min="1" style="width: 60px;">
 
       <input type="text" id="nombre-${index}" placeholder="Tu nombre" />
 
@@ -407,53 +445,74 @@ function actualizarPagina() {
   document.getElementById('total-paginas').textContent = totalPaginas;
 }
 
-function enviarWhatsApp(titulo, precio, index) {
-  const talla = document.getElementById(`talla-${index}`).value;
-  const color = document.getElementById(`color-${index}`).value;
-  const nombre = document.getElementById(`nombre-${index}`).value.trim();
+function seleccionarTalla(index, talla, btn) {
+  const botones = document.querySelectorAll(`#tallas-${index} button`);
+  btn.classList.toggle('selected');
+}
 
-  if (!talla || !color || !nombre) {
-    alert('Por favor completa tu nombre, y selecciona una talla y un color antes de continuar.');
+function seleccionarColor(index, color, box) {
+  box.classList.toggle('selected');
+}
+
+function enviarWhatsApp(titulo, precio, index) {
+  const nombre = document.getElementById(`nombre-${index}`).value.trim();
+  const cantidad = document.getElementById(`cantidad-${index}`).value;
+
+  const tallaBtns = document.querySelectorAll(`#tallas-${index} .selected`);
+  const colorBoxes = document.querySelectorAll(`#colores-${index} .selected`);
+
+  if (!nombre || tallaBtns.length === 0 || colorBoxes.length === 0) {
+    alert('Por favor, completa tu nombre y selecciona al menos una talla y color.');
     return;
   }
 
-  const mensaje = `Hola, soy ${nombre}. Quiero comprar la camiseta "${titulo}" (${precio}) en talla ${talla} y color ${color}.`;
-  const url = `https://wa.me/34651169736?text=${encodeURIComponent(mensaje)}`;
+  const tallas = Array.from(tallaBtns).map(btn => btn.textContent).join(', ');
+  const colores = Array.from(colorBoxes).map(box => box.getAttribute('data-color')).join(', ');
+
+  const precioUnitario = parseFloat(precio.replace('€', '').replace(',', '.'));
+  const total = (precioUnitario * cantidad).toFixed(2);
+
+  const mensaje = `Hola, estoy interesado en comprar la camiseta "${titulo}"\nTallas: ${tallas}\nColores: ${colores}\nCantidad: ${cantidad}\nPrecio unitario: ${precio}\n**Total: ${total}€**\nNombre ${nombre}`;
+
+  const encodedMessage = encodeURIComponent(mensaje);
+  const url = `https://wa.me/34651169736?text=${encodedMessage}`;
+
   window.open(url, '_blank');
 }
 
-function previousPage() {
-  paginaActual = paginaActual > 1 ? paginaActual - 1 : totalPaginas;
-  actualizarPagina();
-}
-
 function nextPage() {
-  paginaActual = paginaActual < totalPaginas ? paginaActual + 1 : 1;
-  actualizarPagina();
+  if (paginaActual < totalPaginas) {
+    paginaActual++;
+    actualizarPagina();
+  }
 }
 
-// Inicializar
-actualizarPagina();
+function previousPage() {
+  if (paginaActual > 1) {
+    paginaActual--;
+    actualizarPagina();
+  }
+}
 
-// Carrusel automático
-const slides = document.querySelectorAll('.carrusel img');
-let current = 0;
+document.addEventListener('DOMContentLoaded', actualizarPagina);
 
-setInterval(() => {
-  slides[current].classList.remove('active');
-  current = (current + 1) % slides.length;
-  slides[current].classList.add('active');
-}, 3000);
+const slider = document.querySelectorAll('#carrusel img');
+let currentSide = 0;
+
+function mostrarSiguienteSlide() {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add('active');
+}
+
+setInterval(mostrarSiguienteSlide, 1000);
 </script>
 
-<footer>
-  <p>&copy; 2025 Catálogo de Camisetas. Todos los derechos reservados.</p>
-</footer>
+<a href="https://www.paypal.me/neuronaintranquila" class="boton-flotante" target="_blank">Donar</a>
 
-<a class="boton-flotante" href="https://www.paypal.me/neuronaintranquila" target="_blank">
-  <img src="Imagen/paypal.png" alt="PayPal" style="width: 25px; height: 25px; margin-right: 10px;">
-  Donar
-</a>
+<footer>
+  <p>© 2025 Tu tienda online</p>
+</footer>
 
 </body>
 </html>
