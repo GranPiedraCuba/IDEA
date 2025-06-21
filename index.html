@@ -321,17 +321,31 @@
       50% { opacity: 0.7;}
     }
 
-        @media (min-width: 768px) {
-      .catalogo {
-        grid-template-columns: repeat(2, 1fr);
+      @media (min-width: 600px) {
+      header h1 {
+        font-size: 18px;
+      } 
+      .carrito-panel {
+        width: 90%;
+        right: 5%;
+        top: 60px;
+      }
+      .tarjeta-inner {
+        height: 180px
       }
       
-      .carrusel {
-        height: 400px;
+      .tarjeta-dorso button {
+        font-size: 12px;
+        padding: 4px 8px;
       }
       
-      .carrusel img {
-        height: 400px;
+      .carrito-icono {
+        font-size: 20px;
+      }
+      .carrito-contador {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
       }
     }
 
