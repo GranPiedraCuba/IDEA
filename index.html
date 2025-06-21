@@ -2,553 +2,739 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gran Piedra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-   * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: sans-serif;
-  background: #f5f5f5;
-  padding-bottom: 80px;
-}
-
-#menu {
-  background: #020169;
-  color: white;
-  padding: 15px 0;
-  text-align: center;
-  top: 0;
-  z-index: 10;
-  transition: padding 0.3s ease;
-}
-
-.logo {
-  font-size: 1.5em;
-}
-
-.carrusel {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  max-height: 300px;
-}
-
-.carrusel img {
-  width: 100%;
-  display: none;
-  object-fit: cover;
-  height: 300px;
-  transition: opacity 1s ease;
-}
-
-.carrusel img.active {
-  display: block;
-}
-
-.catalogo {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding: 16px;
-}
-
-.producto {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 360px;
-  box-sizing: border-box;
-}
-
-.producto img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 20px;
-}
-
-.precio {
-  font-weight: bold;
-  color: #060892;
-  margin: 10px 0;
-  animation: parpadeo 5s infinite;
-}
-
-.botones-talla button,
-.boton-ws {
-  margin: 5px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  background: #060892;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  animation: parpadeo 3s infinite;
-}
-
-.botones-talla button:hover,
-.boton-ws:hover {
-  background: #ff0000;
-}
-
-.botones-talla .selected,
-.botones-color .selected {
-  border: 2px solid #000000;
-  box-shadow: 0 0 5px #000000;
-}
-
-.botones-color {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.color-box {
-  width: 25px;
-  height: 25px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 2px solid #ccc;
-  transition: transform 0.2s;
-}
-
-.color-box:hover {
-  transform: scale(1.1);
-}
-
-input[type="number"],
-input[type="text"] {
-  margin: 5px 0;
-  padding: 5px;
-  width: 100%;
-  max-width: 150px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.contenedor {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.navegacion {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.flecha {
-  cursor: pointer;
-  font-size: 1.5em;
-  user-select: none;
-}
-
-.contador-paginas {
-  font-size: 1.2em;
-}
-
-footer {
-  text-align: center;
-  padding: 15px 0;
-  background: #222;
-  color: white;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-}
-
-.boton-flotante {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #0070ba;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50px;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  animation: parpadeo 6s infinite;
-}
-
-@keyframes parpadeo {
-  0%, 100% {
-    opacity: 1;
-  } 
-  50% { 
-    opacity: 0.3;
-  }
-}
-
-@media (min-width: 768px) {
-      .catalogo {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .carrusel {
-        height: 400px;
-      }
-
-      .carrusel img {
-        height: 400px;
-      }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f8f9fa;
+      color: #333;
     }
 
-@media (max-width: 1024px) {
-  .catalogo {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    header {
+      background: #20232a;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-  .color-box {
-    width: 20px;
-    height: 20px;
-  }
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 900;
+    }
 
-  #menu {
-    font-size: 0.9em;
-  }
+    .carrito-icono {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+      user-select: none;
+    }
 
-  .boton-flotante {
-    font-size: 0.9em;
-    padding: 8px 12px;
-  }
-}
+    .carrito-contador {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: crimson;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Banner Carrusel */
+    .banner {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      max-height: 300px;
+      margin-bottom: 20px;
+    }
+    .carousel {
+      position: relative;
+      width: 100%;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      height: auto;
+    }
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .fade {
+      animation-name: fade;
+      animation-duration: 1s;
+    }
+    @keyframes fade {
+      from { opacity: 0.4 }
+      to { opacity: 1 }
+    }
+
+    /* Catálogo */
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 0 20px 20px;
+    }
+
+    .tarjeta {
+      perspective: 1000px;
+      cursor: pointer;
+      width: 180px;
+    }
+
+    .tarjeta-inner {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      border-radius: 12px;
+    }
+
+    .tarjeta:hover .tarjeta-inner {
+      transform: rotateY(180deg);
+    }
+
+    .tarjeta-frente, .tarjeta-dorso {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .tarjeta-frente img {
+      max-width: 80%;
+      height: auto;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .tarjeta-dorso {
+      transform: rotateY(180deg);
+      text-align: center;
+    }
+
+    .tarjeta-dorso h3 {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .tarjeta-dorso .tallas {
+      display: flex;
+      gap: 6px;
+      margin: 8px 0;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+
+    .tarjeta-dorso .tallas button {
+      background: #e0e0e0;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .tarjeta-dorso .tallas button.selected,
+    .tarjeta-dorso .tallas button:hover {
+      background: #25d366;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .tarjeta-dorso button {
+      background: #20232a;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 400;
+      margin-top: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: auto;
+      display: inline-block;
+    }
+
+    .tarjeta-dorso button:hover {
+      background: #2f333d;
+    }
+
+    /* Carrito */
+    .carrito-panel {
+      position: fixed;
+      top: 60px;
+      right: 15px;
+      background: rgba(255,255,255,0.98);
+      width: 300px;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      z-index: 1000;
+      display: none;
+      overflow-y: auto;
+    }
+
+    .carrito-panel h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .carrito-panel h4 span {
+      float: right;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 22px;
+      user-select: none;
+    }
+
+    .carrito-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .carrito-panel li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .carrito-panel li button {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .carrito-total {
+      font-weight: bold;
+      text-align: right;
+      margin-top: 10px;
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+    }
+
+    .carrito-panel .finalizar {
+      background: #25d366;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* Paginación */
+    #paginacion {
+      text-align: center;
+      margin: 20px 0 40px;
+    }
+    #paginacion button {
+      margin: 0 5px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #ddd;
+      color: black;
+      transition: background 0.3s, color 0.3s;
+      font-weight: 600;
+    }
+    #paginacion button.active,
+    #paginacion button:hover {
+      background: #25d366;
+      color: white;
+    }
+
+    footer {
+      background: #20232a;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      margin-top: 40px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .boton-flotante {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #0070ba;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: parpadeo 2s infinite;
+    }
+
+    @keyframes parpadeo {
+      0%, 100% {opacity: 1;}
+      50% { opacity: 0.7;}
+    }
+
   </style>
 </head>
 <body>
 
-<nav id="menu">
-  <div class="logo">Catálogo</div>
-  <p>Camiseta con pegatina</p>
-</nav>
+  <!-- Banner Carrusel -->
 
-<div class="carrusel" id="carrusel">
-  <img src="Imagen/baner 4.jpg" class="active" alt="Slide 1">
-  <img src="Imagen/baner 2.jpeg" alt="Slide 2">
-  <img src="Imagen/baner 3.jpg" alt="Slide 3">
-  <img src="Imagen/baner 1.jpeg" alt="Slide 4">
-</div>
-
-<main class="catalogo" id="productos-container"></main>
-
-<div class="contenedor">
-  <div class="navegacion">
-    <div class="flecha" onclick="previousPage()">◀</div>
-    <div class="contador-paginas">
-      <span id="pagina-actual">1</span> /
-      <span id="total-paginas">1</span>
+  <header>
+    <h1>Catálogo</h1>
+    <div class="carrito-icono" id="iconoCarrito" aria-label="Abrir carrito de compras" role="button" tabindex="0">
+      🛒<span class="carrito-contador" id="contadorCarrito">0</span>
     </div>
-    <div class="flecha" onclick="nextPage()">▶</div>
+  </header>
+  
+  <section class="banner">
+    <div class="carousel">
+      <div class="slide fade"><img src="Imagen/baner 4.jpg" alt="Banner 4" /></div>
+      <div class="slide fade"><img src="Imagen/baner 2.jpeg" alt="Banner 2" /></div>
+      <div class="slide fade"><img src="Imagen/baner 3.jpg" alt="Banner 3" /></div>
+    </div>
+  </section>
+
+  <main class="catalogo" id="catalogo"></main>
+
+  <div class="carrito-panel" id="panelCarrito" aria-live="polite" aria-label="Carrito de compras">
+    <h4>Carrito de compras <span id="cerrarCarritoBtn" tabindex="0" role="button" aria-label="Cerrar carrito">&times;</span></h4>
+    <ul id="listaCarrito"></ul>
+    <div class="carrito-total" id="totalCarrito">Total: €0.00</div>
+    <button class="finalizar" id="finalizarCompraBtn">Enviar por WhatsApp</button>
   </div>
-</div>
 
-<script>
-const productos = [
-{
-    imagen: 'Imagen/1.png',
-    titulo: 'Andas más apretado que un Cohíba en su caja',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/2.png',
-    titulo: 'Más vale maña que almendrón roto',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/3.png',
-    titulo: 'Ese tiene menos palabras que un mudo jugando',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/4.png',
-    titulo: 'Estás más perdido que guajiro en la Plaza de la Revolución',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/5.jpeg',
-    titulo: 'Con tu amor hasta el pan con timba sabe a gloria',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/6.png',
-    titulo: 'Tienes más historia que la Habana Vieja',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/7.jpeg',
-    titulo: 'No te pongas como el malecón en Temporal',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/8.jpeg',
-    titulo: 'No te compliques, que la vida es un juego de dominó',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/9.jpeg',
-    titulo: 'Tú eres el guarapo de mi vida',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/10.png',
-    titulo: 'Tu sonrisa ilumina más que un almendrón con luces led',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/11.jpeg',
-    titulo: 'Como dijo Benny Moré: Qué bueno baila usted!... y qué bien me hace quererte',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/12.jpeg',
-    titulo: 'Eres como el café cubano, pequeño, fuerte y me despiertas el alma',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/13.png',
-    titulo: 'Andas más apretado que un Cohíba en su caja',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/14.jpeg',
-    titulo: 'Eres la candela que me cocina el corazón',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/15.png',
-    titulo: 'El que no tiene de congo, tiene de carabalí',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/16.png',
-    titulo: 'Aquí no se rinde nadie. Cojone',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/17.png',
-    titulo: 'Más viejo que el camino de El Rocío',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/18.png',
-    titulo: 'A caballo regalao no se le mira el colmillo',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/19.png',
-    titulo: 'El que se fue para Mantilla, perdió su silla',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/20.png',
-    titulo: 'No hay peor ciego que el que no quiere ver',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/21.png',
-    titulo: 'No por mucho madrugar, amanece más temprano',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/22.png',
-    titulo: 'El que no llora no mama',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/23.png',
-    titulo: 'En casa de herrero, cuchillo de palo',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/24.png',
-    titulo: 'Más claro no canta un gallo',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/25.png',
-    titulo: 'Yo soy cubano y digo asere',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/26.png',
-    titulo: 'Yo soy cubana y digo asere',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/27.png',
-    titulo: 'Al pan pan, y al vino vino',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/28.png',
-    titulo: 'A mi me dicen Cuba',
-    precio: '12€',
-  },
-  {
-    imagen: 'Imagen/29.png',
-    titulo: 'Cubano soy',
-    precio: '12€',
-  },
+  <div id="paginacion"></div>
 
-  {
-    imagen: 'Imagen/30.png',
-    titulo: 'Date un cinco papito',
-    precio: '12€',
-  },
+  <footer>
+    <h3>Contacto</h3>
+    <p>WhatsApp: +34651169736</p>
+  </footer>
 
-  {
-    imagen: 'Imagen/31.png',
-    titulo: 'Yo soy asere y bien',
-    precio: '12€',
-  },
+  <script>
+    // Banner carrusel
+    let slideIndex = 0;
+    function showSlides() {
+      const slides = document.getElementsByClassName("slide");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) slideIndex = 1;
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 4000);
+    }
+    showSlides();
 
-  {
-    imagen: 'Imagen/32.png',
-    titulo: 'Asere qué bola contigo',
-    precio: '12€',
-  },
+    // Productos y carrito
+    const productos = [
+      {
+        id: "1",
+        nombre:"Andas más apretado que un Cohíba en su caja",
+        precio:"12",
+        imagen:"Imagen/1.png"
+      },
+      {
+        id: "2",
+        nombre:"Más vale maña que almendrón roto",
+        precio:"12",
+        imagen:"Imagen/2.png"
+      },
+      {
+        id: "3",
+        nombre:"Ese tiene menos palabras que un mudo jugando",
+        precio:"12",
+        imagen:"Imagen/3.png"
+      },
+      {
+        id: "4",
+        nombre:"Estás más perdido que guajiro en la Plaza de la Revolución",
+        precio:"12",
+        imagen:"Imagen/4.png"
+      },
+      {
+        id: "5",
+        nombre:"Con tu amor hasta el pan con timba sabe a gloria",
+        precio:"12",
+        imagen:"Imagen/5.jpeg"
+      },
+      {
+        id: "6",
+        nombre:"Tienes más historia que la Habana Vieja",
+        precio:"12",
+        imagen:"Imagen/6.png"
+      },
+      {
+        id: "7",
+        nombre:"No te pongas como el malecón en Temporal",
+        precio:"12",
+        imagen:"Imagen/7.jpeg"
+      },
+      {
+        id: "8",
+        nombre:"No te compliques, que la vida es un juego de dominó",
+        precio:"12",
+        imagen:"Imagen/8.jpeg"
+      },
+      {
+        id: "9",
+        nombre:"Tú eres el guarapo de mi vida",
+        precio:"12",
+        imagen:"Imagen/9.jpeg"
+      },
+      {
+        id: "10",
+        nombre:"Tu sonrisa ilumina más que un almendrón con luces led",
+        precio:"12",
+        imagen:"Imagen/10.png"
+      },
+      {
+        id: "11",
+        nombre:"Como dijo Benny Moré: Qué bueno baila usted!... y qué bien me hace quererte",
+        precio:"12",
+        imagen:"Imagen/11.jpeg"
+      },
+      {
+        id: "12",
+        nombre:"Eres como el café cubano, pequeño, fuerte y me despiertas el alma",
+        precio:"12",
+        imagen:"Imagen/12.jpeg"
+      },
+      {
+        id: "13",
+        nombre:"Andas más apretado que un Cohíba en su caja",
+        precio:"12",
+        imagen:"Imagen/13.png"
+      },
+      {
+        id: "14",
+        nombre:"Eres la candela que me cocina el corazón",
+        precio:"12",
+        imagen:"Imagen/14.jpeg"
+      },
+      {
+        id: "15",
+        nombre:"El que no tiene de congo, tiene de carabalí",
+        precio:"12",
+        imagen:"Imagen/15.png"
+      },
+      {
+        id: "16",
+        nombre:"Aquí no se rinde nadie. Cojone",
+        precio:"12",
+        imagen:"Imagen/16.png"
+      },
+      {
+        id: "17",
+        nombre:"Más viejo que el camino de El Rocío",
+        precio:"12",
+        imagen:"Imagen/17.png"
+      },
+      {
+        id: "18",
+        nombre:"A caballo regalao no se le mira el colmillo",
+        precio:"12",
+        imagen:"Imagen/18.png"
+      },
+      {
+        id: "19",
+        nombre:"El que se fue para Mantilla, perdió su silla",
+        precio:"12",
+        imagen:"Imagen/19.png"
+      },
+      {
+        id: "20",
+        nombre:"No hay peor ciego que el que no quiere ver",
+        precio:"12",
+        imagen:"Imagen/20.png"
+      },
+      {
+        id: "21",
+        nombre:"'No por mucho madrugar, amanece más temprano",
+        precio:"12",
+        imagen:"Imagen/21.png"
+      },
+      {
+        id: "22",
+        nombre:"El que no llora no mama",
+        precio:"12",
+        imagen:"Imagen/22.png"
+      },
+      {
+        id: "23",
+        nombre:"En casa de herrero, cuchillo de palo",
+        precio:"12",
+        imagen:"Imagen/23.png"
+      },
+      {
+        id: "24",
+        nombre:"Más claro no canta un gallo",
+        precio:"12",
+        imagen:"Imagen/24.png"
+      },
+      {
+        id: "25",
+        nombre:"Yo soy cubano y digo asere",
+        precio:"12",
+        imagen:"Imagen/25.png"
+      },
+      {
+        id: "26",
+        nombre:"Yo soy cubana y digo asere",
+        precio:"12",
+        imagen:"Imagen/26.png"
+      },
+      {
+        id: "27",
+        nombre:"Al pan pan, y al vino vino",
+        precio:"12",
+        imagen:"Imagen/27.png"
+      },
+      {
+        id: "28",
+        nombre:"A mi me dicen Cuba",
+        precio:"12",
+        imagen:"Imagen/28.png"
+      },
+      {
+        id: "29",
+        nombre:"Cubano soy",
+        precio:"12",
+        imagen:"Imagen/29.png"
+      },
+      {
+        id: "30",
+        nombre:"Date un cinco papito",
+        precio:"12",
+        imagen:"Imagen/30.png"
+      },
+      {
+        id: "31",
+        nombre:"Yo soy asere y bien",
+        precio:"12",
+        imagen:"Imagen/31.png"
+      },
+      {
+        id: "32",
+        nombre:"Asere qué bola contigo",
+        precio:"12",
+        imagen:"Imagen/32.png"
+      },
+      {
+        id: "33",
+        nombre:"Que cooosa",
+        precio:"12",
+        imagen:"Imagen/33.png"
+      },
+      {
+        id: "34",
+        nombre:"De piii...",
+        precio:"12",
+        imagen:"Imagen/34.png"
+      },
+      {
+        id: "35",
+        nombre:"Spanish: Abuela. Cuban: Awela",
+        precio:"12",
+        imagen:"Imagen/35.png"
+      },    ]
 
-  {
-    imagen: 'Imagen/33.png',
-    titulo: 'Que cooosa',
-    precio: '12€',
-  },
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let tallasSeleccionadas = {};
+    let paginaActual = 1;
+    const productosPorPagina = 10;
 
-  {
-    imagen: 'Imagen/34.png',
-    titulo: 'De piii...',
-    precio: '12€',
-  },
+    const catalogo = document.getElementById("catalogo");
+    const panelCarrito = document.getElementById("panelCarrito");
+    const listaCarrito = document.getElementById("listaCarrito");
+    const totalCarrito = document.getElementById("totalCarrito");
+    const contadorCarrito = document.getElementById("contadorCarrito");
+    const iconoCarrito = document.getElementById("iconoCarrito");
+    const cerrarCarritoBtn = document.getElementById("cerrarCarritoBtn");
+    const finalizarCompraBtn = document.getElementById("finalizarCompraBtn");
+    const paginacionDiv = document.getElementById("paginacion");
 
-  {
-    imagen: 'Imagen/35.png',
-    titulo: 'Spanish: Abuela. Cuban: Awela',
-    precio: '12€',
-  },
-];
+    function cargarProductos() {
+      catalogo.innerHTML = "";
 
-let paginaActual = 1;
-const productosPorPagina = 10;
-const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+      const inicio = (paginaActual - 1) * productosPorPagina;
+      const fin = inicio + productosPorPagina;
+      const paginaProductos = productos.slice(inicio, fin);
 
-function actualizarPagina() {
-  const inicio = (paginaActual - 1) * productosPorPagina;
-  const fin = inicio + productosPorPagina;
-  const productosPagina = productos.slice(inicio, fin);
+      paginaProductos.forEach(prod => {
+        catalogo.innerHTML += `
+          <div class="tarjeta" style="animation: fadeIn 0.5s ease">
+            <div class="tarjeta-inner">
+              <div class="tarjeta-frente">
+                <img src="${prod.imagen}" alt="${prod.nombre}">
+              </div>
+              <div class="tarjeta-dorso">
+                <h3>${prod.nombre}</h3>
+                <p>Precio: €${prod.precio}</p>
+                <div class="tallas">
+                  <button onclick="seleccionarTalla(this, '${prod.id}', 'S')">S</button>
+                  <button onclick="seleccionarTalla(this, '${prod.id}', 'M')">M</button>
+                  <button onclick="seleccionarTalla(this, '${prod.id}', 'L')">L</button>
+                  <button onclick="seleccionarTalla(this, '${prod.id}', 'XL')">XL</button>
+                </div>
+                <button onclick="agregarAlCarrito('${prod.id}', '${prod.nombre}', '${prod.precio}')">Agregar</button>
+                <button onclick="comprarPorWhatsApp('${prod.id}', '${prod.nombre}', '${prod.precio}')">WhatsApp</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
 
-  const container = document.getElementById('productos-container');
-  container.innerHTML = productosPagina.map((producto, index) => `
-    <div class="producto">
-      <img src="${producto.imagen}" alt="${producto.titulo}">
-      <h3>${producto.titulo}</h3>
-      <p class="precio">${producto.precio}</p>
+      cargarPaginacion();
+    }
 
-      <label>Talla:</label>
-      <div id="tallas-${index}" class="botones-talla">
-        ${['S','M','L','XL'].map(t => `<button onclick="seleccionarTalla(${index}, '${t}', this)">${t}</button>`).join('')}
-      </div>
+    function cargarPaginacion() {
+      paginacionDiv.innerHTML = "";
+      const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+      for (let i = 1; i <= totalPaginas; i++) {
+        const boton = document.createElement("button");
+        boton.textContent = i;
+        boton.className = i === paginaActual ? "active" : "";
+        boton.onclick = () => {
+          paginaActual = i;
+          cargarProductos();
+        };
+        paginacionDiv.appendChild(boton);
+      }
+    }
 
-      <label>Color:</label>
-      <div id="colores-${index}" class="botones-color">
-        <div class="color-box" style="background-color: black;" data-color="Negro" onclick="seleccionarColor(${index}, 'Negro', this)"></div>
-        <div class="color-box" style="background-color: white; border: 1px solid #000;" data-color="Blanco" onclick="seleccionarColor(${index}, 'Blanco', this)"></div>
-      </div>
+    function seleccionarTalla(boton, productoId, talla) {
+      tallasSeleccionadas[productoId] = talla;
+      const botones = boton.parentElement.querySelectorAll("button");
+      botones.forEach(btn => btn.classList.remove("selected"));
+      boton.classList.add("selected");
+    }
 
-      <label for="cantidad-${index}">Cantidad:</label>
-      <input type="number" id="cantidad-${index}" value="1" min="1" style="width: 60px;">
+    function agregarAlCarrito(id, nombre, precio) {
+      const talla = tallasSeleccionadas[id];
+      if (!talla) return alert("Selecciona una talla primero.");
+      carrito.push({ id, nombre, precio, talla });
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      actualizarContador();
+      mostrarCarrito();
+    }
 
-      <input type="text" id="nombre-${index}" placeholder="Tu nombre" />
+    function actualizarContador() {
+      contadorCarrito.textContent = carrito.length;
+    }
 
-      <button class="boton-ws" onclick="enviarWhatsApp('${producto.titulo}', '${producto.precio}', ${index})">
-        Comprar por WhatsApp
-      </button>
-    </div>
-  `).join('');
+    function mostrarCarrito() {
+      listaCarrito.innerHTML = "";
+      let suma = 0;
+      carrito.forEach((item, index) => {
+        suma += parseFloat(item.precio);
+        listaCarrito.innerHTML += `<li>${item.nombre} (${item.talla}) - €${item.precio} <button onclick="eliminarDelCarrito(${index})">&times;</button></li>`;
+      });
+      totalCarrito.textContent = `Total: €${suma.toFixed(2)}`;
+      panelCarrito.style.display = "block";
+    }
 
-  document.getElementById('pagina-actual').textContent = paginaActual;
-  document.getElementById('total-paginas').textContent = totalPaginas;
-}
+    function cerrarCarrito() {
+      panelCarrito.style.display = "none";
+    }
 
-function seleccionarTalla(index, talla, btn) {
-  const botones = document.querySelectorAll(`#tallas-${index} button`);
-  btn.classList.toggle('selected');
-}
+    iconoCarrito.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (panelCarrito.style.display === "block") {
+        cerrarCarrito();
+      } else {
+        mostrarCarrito();
+      }
+    });
 
-function seleccionarColor(index, color, box) {
-  box.classList.toggle('selected');
-}
+    cerrarCarritoBtn.addEventListener("click", cerrarCarrito);
+    cerrarCarritoBtn.addEventListener("keypress", e => { if(e.key === "Enter") cerrarCarrito(); });
 
-function enviarWhatsApp(titulo, precio, index) {
-  const nombre = document.getElementById(`nombre-${index}`).value.trim();
-  const cantidad = document.getElementById(`cantidad-${index}`).value;
+    document.addEventListener("click", (e) => {
+      if (!panelCarrito.contains(e.target) && !iconoCarrito.contains(e.target)) {
+        cerrarCarrito();
+      }
+    });
 
-  const tallaBtns = document.querySelectorAll(`#tallas-${index} .selected`);
-  const colorBoxes = document.querySelectorAll(`#colores-${index} .selected`);
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      actualizarContador();
+      mostrarCarrito();
+    }
 
-  if (!nombre || tallaBtns.length === 0 || colorBoxes.length === 0) {
-    alert('Por favor, completa tu nombre y selecciona al menos una talla y color.');
-    return;
-  }
+    finalizarCompraBtn.addEventListener("click", () => {
+      if (!carrito.length) return alert("Carrito vacío");
+      let mensaje = "Hola, quiero comprar:\n" + carrito.map(p => `• ${p.nombre} (${p.talla}) - €${p.precio}`).join("\n");
+      let total = carrito.reduce((acc, p) => acc + parseFloat(p.precio), 0).toFixed(2);
+      mensaje += `\nTotal: €${total}`;
+      window.open(`https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`, "_blank");
+      cerrarCarrito();
+    });
 
-  const tallas = Array.from(tallaBtns).map(btn => btn.textContent).join(', ');
-  const colores = Array.from(colorBoxes).map(box => box.getAttribute('data-color')).join(', ');
+    function comprarPorWhatsApp(id, nombre, precio) {
+      const talla = tallasSeleccionadas[id];
+      if (!talla) return alert("Selecciona una talla primero.");
+      const mensaje = `Hola, quiero comprar:\n• ${nombre} (${talla}) - €${precio}`;
+      window.open(`https://wa.me/34651169736?text=${encodeURIComponent(mensaje)}`, "_blank");
+    }
 
-  const precioUnitario = parseFloat(precio.replace('€', '').replace(',', '.'));
-  const total = (precioUnitario * cantidad).toFixed(2);
+    cargarProductos();
+    actualizarContador();
 
-  const mensaje = `Hola, estoy interesado en comprar la camiseta "${titulo}"\nTallas: ${tallas}\nColores: ${colores}\nCantidad: ${cantidad}\nPrecio unitario: ${precio}\n**Total: ${total}€**\nNombre ${nombre}`;
+  </script>
 
-  const encodedMessage = encodeURIComponent(mensaje);
-  const url = `https://wa.me/34651169736?text=${encodedMessage}`;
-
-  window.open(url, '_blank');
-}
-
-function nextPage() {
-  if (paginaActual < totalPaginas) {
-    paginaActual++;
-    actualizarPagina();
-  }
-}
-
-function previousPage() {
-  if (paginaActual > 1) {
-    paginaActual--;
-    actualizarPagina();
-  }
-}
-
-document.addEventListener('DOMContentLoaded', actualizarPagina);
-
-const slider = document.querySelectorAll('#carrusel img');
-let currentSide = 0;
-
-function mostrarSiguienteSlide() {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('active');
-}
-
-setInterval(mostrarSiguienteSlide, 1000);
-</script>
-
-<a href="https://www.paypal.me/neuronaintranquila" class="boton-flotante" target="_blank">Donar</a>
-
-<footer>
-  <p>© 2025 Tu tienda online</p>
-</footer>
+  <a class="boton-flotante" href="https://www.paypal.me/neuronaintranquila" target="_blank">
+    <img src="Imagen/paypal.png" alt="PayPal" style="width: 25px; height: 25px; margin-right: 10px;">
+    Donar
+  </a>
 
 </body>
 </html>
