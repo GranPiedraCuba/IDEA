@@ -743,7 +743,7 @@
       let mensaje = "Hola, quiero comprar:\n" + carrito.map(p => `• ${p.nombre} (${p.talla}) - €${p.precio}`).join("\n");
       let total = carrito.reduce((acc, p) => acc + parseFloat(p.precio), 0).toFixed(2);
       mensaje += `\nTotal: €${total}`;
-      window.open(`https://wa.me/1234567890?text=${encodeURIComponent(mensaje)}`, "_blank");
+      window.open(`https://wa.me/34651169736?text=${encodeURIComponent(mensaje)}`, "_blank");
       cerrarCarrito();
     });
 
