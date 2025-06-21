@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catálogo</title>
+  <title>PegaStyle - Catálogo de Pegatinas</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -90,14 +90,20 @@
     .catalogo {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 0 20px 20px;
+      gap: 0.8px;
+      padding: 1rem;
     }
 
     .tarjeta {
       perspective: 1000px;
       cursor: pointer;
-      width: 180px;
+      width: 160px;
+    }
+  
+    @media (min-width: 600px) {
+      .catalogo {
+         grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .tarjeta-inner {
@@ -133,6 +139,7 @@
       height: auto;
       pointer-events: none;
       user-select: none;
+      display: block;
     }
 
     .tarjeta-dorso {
@@ -321,31 +328,17 @@
       50% { opacity: 0.7;}
     }
 
-      @media (min-width: 768px) {
-      header h1 {
-        font-size: 18px;
-      } 
-      .carrito-panel {
-        width: 90%;
-        right: 5%;
-      }
-      .tarjeta-inner {
-        height: 180px;
+        @media (min-width: 768px) {
+      .catalogo {
         grid-template-columns: repeat(2, 1fr);
       }
       
-      .tarjeta-dorso button {
-        font-size: 12px;
-        padding: 4px 8px;
+      .carrusel {
+        height: 400px;
       }
       
-      .carrito-icono {
-        font-size: 20px;
-      }
-      .carrito-contador {
-        width: 16px;
-        height: 16px;
-        font-size: 10px;
+      .carrusel img {
+        height: 400px;
       }
     }
 
